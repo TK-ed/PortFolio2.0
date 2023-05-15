@@ -277,7 +277,6 @@ const Stats = () => {
               <p>
                 Total Repositories:{""}
                 <span className="stat__key repos">
-                  {/* {gitHubStats?.totalRepos ?? cookies?.totalRepos ?? 26} */}
                   {26}
                 </span>
               </p>
@@ -306,7 +305,6 @@ const Stats = () => {
               <p>
                 Total Stars:{" "}
                 <span className="stat__key stars">
-                  {/* {gitHubStats?.totalStars ?? cookies?.totalStars ?? 0} */}
                   {12}
                 </span>
               </p>
