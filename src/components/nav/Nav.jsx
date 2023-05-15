@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import "./nav.css";
 import { AiOutlineHome, AiOutlineUser } from "react-icons/ai";
 import { BiBook, BiMessageSquareDetail, BiCodeAlt } from "react-icons/bi";
-import { RiServiceLine } from "react-icons/ri";
-import { Link, scroll, animateScroll } from "react-scroll";
 import { IoIosStats } from "react-icons/io";
 
 const Nav = () => {

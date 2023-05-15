@@ -42,10 +42,11 @@ const About = () => {
           </div>
 
           <p>
-            I am Tharun Kumar, a Pre-Final year
-            devoted student with aspirations of becoming a prosperous developer. 
-            A dedicated backend developer that is also skilled in creating the user interface for web applications.
-            An avid user of blockchain technology and an excellent team player with attention to detail.
+            I am Tharun Kumar, a Pre-Final year devoted student with aspirations
+            of becoming a prosperous developer. A dedicated backend developer
+            that is also skilled in creating the user interface for web
+            applications. An avid user of blockchain technology and an excellent
+            team player with attention to detail.
             <br></br>
             <br></br>
             <h3>"Developer: An organism that turns coffee into code."</h3>
