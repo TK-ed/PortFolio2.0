@@ -13,13 +13,17 @@ import "react-circular-progressbar/dist/styles.css";
 import { Octokit } from "octokit";
 import { useCookies } from "react-cookie";
 
-const { REACT_APP_GITHUB_PAT, REACT_APP_GITHUB_USER } = process.env;
+const REACT_APP_GITHUB_PAT  = process.env.REACT_APP_GITHUB_PAT;
 const REACT_APP_USERNAME = 'TharunKumarC'
+const REACT_APP_GITHUB_USER = 'TK-ed'
 
-const octokit = new Octokit({
+const octokit = new Octokit({ 
   auth: REACT_APP_GITHUB_PAT,
 });
+
 const LEETCODE_API_ENDPOINT = `https://tk-ed.cyclic.app/${REACT_APP_USERNAME}`;
+
+console.log(REACT_APP_GITHUB_PAT);
 
 let cookieExpiry = new Date();
 cookieExpiry.setDate(cookieExpiry.getDate() + 30 * 24 * 60 * 60);
@@ -35,105 +39,93 @@ const fetchLeetcodeProfile = async () => {
   return res;
 };
 
-const fetchGitHubProfile = async () => {
-  let result = {
-    totalRepos: 0,
-    totalCommits: 0,
-    totalStars: 0,
-    totalPRs: 0,
-  };
+// const fetchGitHubProfile = async () => {
+//   let result = {
+//     totalRepos: 0,
+//     totalCommits: 0,
+//     totalStars: 0,
+//     totalPRs: 0,
+//   };
 
-  console.log("Fetching User Data using GitHub API...");
+//   console.log("Fetching User Data using GitHub API...");
 
-  let { data } = await octokit.request(
-    `GET /users/${REACT_APP_GITHUB_USER}/repos?per_page=300`
-  );
-  let repos = data;
-  result.totalRepos += repos.length;
+//   let { data } = await octokit.request(
+//     `GET /users/${REACT_APP_GITHUB_USER}/repos?per_page=300`
+//   );
+//   let repos = data;
+//   result.totalRepos += repos.length;
 
-  for (let repo of repos) {
-    result.totalStars += repo.stargazers_count;
+//   for (let repo of repos) {
+//     result.totalStars += repo.stargazers_count;
 
-    let res = await octokit.request(
-      `GET /repos/${REACT_APP_GITHUB_USER}/${repo.name}/pulls?state=all`
-    );
-    result.totalPRs += res.data.length;
+//     let res = await octokit.request(
+//       `GET /repos/${REACT_APP_GITHUB_USER}/${repo.name}/pulls?state=all`
+//     );
+//     result.totalPRs += res.data.length;
 
-    const { data } = await octokit.request(
-      `GET /repos/${REACT_APP_GITHUB_USER}/${repo.name}/commits?per_page=300`
-    );
-    for (let comm of data) {
-      if (comm?.author?.login === `${REACT_APP_GITHUB_USER}`) {
-        result.totalCommits += 1;
-      }
-    }
-  }
+//     const { data } = await octokit.request(
+//       `GET /repos/${REACT_APP_GITHUB_USER}/${repo.name}/commits?per_page=300`
+//     );
+//     for (let comm of data) {
+//       if (comm?.author?.login === `${REACT_APP_GITHUB_USER}`) {
+//         result.totalCommits += 1;
+//       }
+//     }
+//   }
 
-  result.totalPRs +=
-    (
-      await octokit.request(
-        "GET /repos/Ayush-Panwar/eladrProtocolFrontend/pulls?state=all"
-      )
-    ).data.length +
-    (
-      await octokit.request(
-        "GET /repos/eduladder/eladrProtocolFrontend/pulls?state=all"
-      )
-    ).data.length;
+//   console.log("GitHub API call status: Success!");
 
-  console.log("GitHub API call status: Success!");
+//   return result;
+// };
 
-  return result;
-};
+// const fetchGitCommitsAndStars = async () => {
+//   let totalStars = 0;
+//   let { data } = await octokit.request(
+//     `GET /users/${REACT_APP_GITHUB_USER}/repos?per_page=300`
+//   );
+//   let repos = data;
 
-const fetchGitCommitsAndStars = async () => {
-  let totalStars = 0;
-  let { data } = await octokit.request(
-    `GET /users/${REACT_APP_GITHUB_USER}/repos?per_page=300`
-  );
-  let repos = data;
+//   for (let repo in repos) {
+//     totalStars += repo.stargazers_count;
+//   }
 
-  for (let repo in repos) {
-    totalStars += repo.stargazers_count;
-  }
+//   return { totalRepos: repos.length, totalStars: totalStars };
+// };
 
-  return { totalRepos: repos.length, totalStars: totalStars };
-};
-
-const fetchGitStars = async () => {};
+// const fetchGitStars = async () => {};
 
 const Stats = () => {
   const [cookies, setCookies] = useCookies({
-    totalRepos: 0,
-    totalCommits: 0,
-    totalPRs: 0,
-    totalStars: 0,
+    // totalRepos: 0,
+    // totalCommits: 0,
+    // totalPRs: 0,
+    // totalStars: 0,
     leetcodeCookie: "",
   });
   const [leetcodeStats, setLeetcodeStats] = useState({});
-  const [gitHubStats, setGitHubStats] = useState({});
+//   const [gitHubStats, setGitHubStats] = useState({});
 
-  const fetchGitCommitsAndStars = async () => {
-    let totalStars = 0;
-    let { data } = await octokit.request(
-      `GET /users/${REACT_APP_GITHUB_USER}/repos?per_page=300`
-    );
-    let repos = data;
+//   const fetchGitCommitsAndStars = async () => {
+//     let totalStars = 0;
+//     let { data } = await octokit.request(
+//       `GET /users/${REACT_APP_GITHUB_USER}/repos?per_page=300`
+//     );
+//     let repos = data;
 
-    for (let repo in repos) {
-      totalStars += repo.stargazers_count;
-    }
+//     for (let repo in repos) {
+//       totalStars += repo.stargazers_count;
+//     }
 
-    const result = { totalRepos: repos.length, totalStars: totalStars };
+//     const result = { totalRepos: repos.length, totalStars: totalStars };
 
-    setGitHubStats(...gitHubStats, ...result);
+//     setGitHubStats(...gitHubStats, ...result);
 
-    return;
-  };
+//     return;
+//   };
 
   useEffect(() => {
     fetchLeetcodeProfile().then((res) => {
-      // console.log(cookies.leetcodeCookie)
+      console.log(cookies.leetcodeCookie)
       setLeetcodeStats(res.data);
       setCookies("leetcodeCookie", JSON.stringify(res.data), {
         path: "/",
@@ -142,31 +134,31 @@ const Stats = () => {
       });
     });
 
-    fetchGitHubProfile().then((res) => {
-      // console.log(res)
-      setGitHubStats(res);
-      const { totalRepos, totalCommits, totalPRs, totalStars } = res;
-      setCookies("totalRepos", totalRepos, {
-        path: "/",
-        expires: cookieExpiry,
-        priority: "High",
-      });
-      setCookies("totalCommits", totalCommits, {
-        path: "/",
-        expires: cookieExpiry,
-        priority: "High",
-      });
-      setCookies("totalPRs", totalPRs, {
-        path: "/",
-        expires: cookieExpiry,
-        priority: "High",
-      });
-      setCookies("totalStars", totalStars, {
-        path: "/",
-        expires: cookieExpiry,
-        priority: "High",
-      });
-    });
+    // fetchGitHubProfile().then((res) => {
+    //   // console.log(res)
+    //   setGitHubStats(res);
+    //   const { totalRepos, totalCommits, totalPRs, totalStars } = res;
+    //   setCookies("totalRepos", totalRepos, {
+    //     path: "/",
+    //     expires: cookieExpiry,
+    //     priority: "High",
+    //   });
+    //   setCookies("totalCommits", totalCommits, {
+    //     path: "/",
+    //     expires: cookieExpiry,
+    //     priority: "High",
+    //   });
+    //   setCookies("totalPRs", totalPRs, {
+    //     path: "/",
+    //     expires: cookieExpiry,
+    //     priority: "High",
+    //   });
+    //   setCookies("totalStars", totalStars, {
+    //     path: "/",
+    //     expires: cookieExpiry,
+    //     priority: "High",
+    //   });
+    // });
   }, []);
 
   return (
@@ -256,7 +248,7 @@ const Stats = () => {
         {/* END OF UI/UX */}
         {/*  */}
 
-        <article className="stat">
+        {/* <article className="stat">
           <div className="stat__head">
             <img
               src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
@@ -308,7 +300,7 @@ const Stats = () => {
             src="https://camo.githubusercontent.com/c5d9921fbcb71e0a160d503b25cd5c566fff104c518127428e3b734a2d61f996/68747470733a2f2f6769746875622d726561646d652d73746174732e76657263656c2e6170702f6170692f746f702d6c616e67732f3f757365726e616d653d544b2d6564267468656d653d68696768636f6e747261737426686964655f626f726465723d7472756526696e636c7564655f616c6c5f636f6d6d6974733d7472756526636f756e745f707269766174653d74727565266c61796f75743d636f6d70616374"
             alt="GitHub Stats Card"
           />
-        </article>
+        </article> */}
         {/* END OF WEB D */}
 
         <article className="stat">
