@@ -3,23 +3,25 @@ import "./stats.css";
 import { MdWorkOutline } from "react-icons/md";
 import { FiExternalLink } from "react-icons/fi";
 import { FaJava } from "react-icons/fa";
-import { BiGitCommit, BiGitPullRequest } from "react-icons/bi";
-import { BsStar } from "react-icons/bs";
+// import { BiGitCommit, BiGitPullRequest } from "react-icons/bi";
+// import { BsStar } from "react-icons/bs";
 import { SiCss3, SiMysql, SiPython } from "react-icons/si";
-import { RiGitRepositoryCommitsLine } from "react-icons/ri";
+// import { RiGitRepositoryCommitsLine } from "react-icons/ri";
 import axios from "axios";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { Octokit } from "octokit";
+// import { Octokit } from "octokit";
 import { useCookies } from "react-cookie";
 
-const REACT_APP_GITHUB_PAT  = process.env.REACT_APP_GITHUB_PAT;
+
+const REACT_APP_GITHUB_PAT  = process.env.REACT_APP_GITHUB_PAT
 const REACT_APP_USERNAME = 'TharunKumarC'
 const REACT_APP_GITHUB_USER = 'TK-ed'
 
-const octokit = new Octokit({ 
-  auth: REACT_APP_GITHUB_PAT,
-});
+
+// const octokit = new Octokit({ 
+//   auth: REACT_APP_GITHUB_PAT,
+// });
 
 const LEETCODE_API_ENDPOINT = `https://tk-ed.cyclic.app/${REACT_APP_USERNAME}`;
 
